@@ -5,7 +5,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract KycContract is Ownable {
     uint256 public kycApprovedUser;
-    uint256 public usersApprovalCount;
     
     enum Status { pending, inprogress, approved, rejected }
 
@@ -19,17 +18,12 @@ contract KycContract is Ownable {
         address walletAddress;
         string name;
         string residentialAddress;
-        string documentsLink;
-        string bankStatementsLink;
+        string kycRegisterationId;
         bool updation;
     }
 
     mapping( address => KYC ) public allowed;
     mapping( address => UserInfo ) public userDetails;
-
-    function isAllowed(address user) public view returns (bool) {
-        return allowed[user].approval;
-    }
 
     // ============= Admin Functionalities  =========================
     function setKYCComleted(address user, uint256 teir) public onlyOwner {
@@ -54,19 +48,21 @@ contract KycContract is Ownable {
 
     // ============= User Functionalists ==============================
 
+    function isAllowed(address user) public view returns (bool, uint256) {
+        return (allowed[user].approval, allowed[user].teir);
+    }
+
     function uploadKycDocuments(
         string memory name,
         string memory residentialAddress,
-        string memory documentsLink,
-        string memory bankStatementsLink
+        string memory kycRegisterationId
     ) public {
         if(userDetails[msg.sender].updation) {
             UserInfo memory userInfo = userDetails[msg.sender];
             
             userInfo.name = name;
             userInfo.residentialAddress = residentialAddress;
-            userInfo.documentsLink = documentsLink;
-            userInfo.bankStatementsLink = bankStatementsLink;
+            userInfo.kycRegisterationId = kycRegisterationId;
 
             userDetails[msg.sender] = userInfo;
         } else {
@@ -74,8 +70,7 @@ contract KycContract is Ownable {
                 msg.sender,
                 name,
                 residentialAddress,
-                documentsLink,
-                bankStatementsLink,
+                kycRegisterationId,
                 true
             );
         }
