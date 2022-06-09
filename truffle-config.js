@@ -42,7 +42,7 @@ module.exports = {
 
   },
   contracts_directory: './contracts/',
-  contracts_build_directory: './abis/',
+  contracts_build_directory: './server/abis/',
   compilers: {
     solc: {
       version: '0.8.0+commit.c7dfd78e',
