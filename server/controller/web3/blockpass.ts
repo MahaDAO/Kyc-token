@@ -13,16 +13,47 @@ const kycNetwork = KycAbi.networks[4]
 const sclNetwork = SclpAbi.networks[4]
 
 const kycContract = new ethers.Contract(kycNetwork.address, KycAbi.abi, provider)
+const kycWithSigner = kycContract.connect(signer)
+
 const sclpContract = new ethers.Contract(sclNetwork.address, SclpAbi.abi, provider)
 
-const addUser = async () => {
-    const kycWithSigner = kycContract.connect(signer)
-
-    kycWithSigner.uploadKycDocuments(
-        "Sagar",
-        "Sagar",
-        "Sag"
+export const addUser = async (walletAddress: any, name: any, dob: any, recordId: any) => {
+    const transaction = await kycWithSigner.uploadKycDocuments(
+        walletAddress,
+        name,
+        dob,
+        recordId
     )
+
+    const receipt = await transaction.wait()
+    return receipt.transactionHash
 }
 
-addUser()
+export const setKYCComleted = async (walletAddress: any, teir: any) => {
+    const transaction = await kycWithSigner.setKYCComleted(
+        walletAddress,
+        teir
+    )
+
+    const receipt = await transaction.wait()
+    return receipt.transactionHash
+}
+
+export const updateKYCTeir = async (walletAddress: any, teir: any) => {
+    const transaction = await kycWithSigner.updateKycTeir(
+        walletAddress,
+        teir
+    )
+
+    const receipt = await transaction.wait()
+    return receipt.transactionHash
+}
+
+export const revokeKyc = async (walletAddress: any) => {
+    const transaction = await kycWithSigner.setKYCRevoked(
+        walletAddress
+    )
+
+    const receipt = await transaction.wait()
+    return receipt.transactionHash
+}
