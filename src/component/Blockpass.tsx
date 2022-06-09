@@ -1,10 +1,19 @@
 
 import React, { Component } from 'react';
 
-class Blockpass extends Component {
+class Blockpass extends React.Component<{},any>{
+    constructor(props: any) {
+        super(props)
+
+        this.state = {
+            walletAddress: ''
+        }
+
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
 
     componentDidMount() {    
-        this.loadBlockpassWidget()
+            this.loadBlockpassWidget()
     }
     
     loadBlockpassWidget = () => {
@@ -22,14 +31,46 @@ class Blockpass extends Component {
         })
     }
 
+    async handleSubmit(event: any) {
+        event.preventDefault()
+        console.log(this.state.walletAddress);
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ address: this.state.walletAddress })
+        };
+        
+        fetch('http://localhost:3001/api/address', requestOptions)
+            .then(response => response.json())
+    }
+
+    async StartKyc(props:any) {
+        
+    }
+
     render() {
         return (
             <div className="main">
                 <h1>DAMM</h1>
-                <input></input>
-                <button id="blockpass-kyc-connect">
-                    Verify with Blockpass
-                </button>
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        ENTER WALLETADDRESS
+                    </label>
+                    <br/>
+                    <br/>
+                    <input 
+                        className='walletAddress'
+                        type="text"
+                        value={this.state.walletAddress}
+                        onChange={event => this.setState({ walletAddress: event.target.value })}
+                    />
+                    <br/>
+                    <br/>
+                    <button id="blockpass-kyc-connect" disabled={this.state.walletAddress === ''}>
+                        Verify with Blockpass
+                    </button>
+                </form>
             </div>
         );
     }

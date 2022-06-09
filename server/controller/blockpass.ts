@@ -15,6 +15,16 @@ const request = async (method: any, recordId: any) => {
     return await rp(options);
 }
 
+export const getWalletAddress = async (req: any, res: any) => {
+    let address = req.body.address
+
+    if (!address){
+        res.send({ error: 'No Wallet Address'})
+    } else {
+        res.send({ address: address })
+    }
+}
+
 export const webhook = async (req :any, res: any) => {
     let body = req.body
     let event = body.event

@@ -13,13 +13,17 @@
     "@types/node": "^17.0.41",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
     "body-parser": "^1.20.0",
+    "ethers": "^5.6.8",
     "morgan": "^1.10.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
+    "truffle-plugin-verify": "^0.5.26",
     "typescript": "^4.7.3",
     "web-vitals": "^2.1.4"
   },
@@ -27,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "verify": "truffle run verify KycContract ERC20Mock --network"
   },
   "eslintConfig": {
     "extends": [

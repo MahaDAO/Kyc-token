@@ -17,7 +17,7 @@ contract KycContract is Ownable {
     struct UserInfo {
         address walletAddress;
         string name;
-        string residentialAddress;
+        string dob;
         string kycRegisterationId;
         bool updation;
     }
@@ -53,23 +53,25 @@ contract KycContract is Ownable {
     }
 
     function uploadKycDocuments(
+        address walletAddress,
         string memory name,
-        string memory residentialAddress,
+        string memory dob,
         string memory kycRegisterationId
     ) public {
         if(userDetails[msg.sender].updation) {
             UserInfo memory userInfo = userDetails[msg.sender];
             
             userInfo.name = name;
-            userInfo.residentialAddress = residentialAddress;
+            userInfo.dob = dob;
             userInfo.kycRegisterationId = kycRegisterationId;
+            userInfo.walletAddress = walletAddress;
 
             userDetails[msg.sender] = userInfo;
         } else {
             userDetails[msg.sender] = UserInfo(
-                msg.sender,
+                walletAddress,
                 name,
-                residentialAddress,
+                dob,
                 kycRegisterationId,
                 true
             );
