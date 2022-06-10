@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const rp = require('request-promise');
 
 import { addUser } from './web3/blockpass'
+import { User } from '../database/models/user'
 
 dotenv.config();
 
@@ -30,11 +31,14 @@ export const getWalletAddress = async (req: any, res: any) => {
 export const webhook = async (req :any, res: any) => {
     let body = req.body
     let event = body.event    
+    
     const fetchedData = await request('GET', body.recordId)
     const parsedData = JSON.parse(fetchedData)
     const data = parsedData.data
     
-
+    console.log(body);
+    console.log('========================================');
+    
     let refId = data.refId
     let recordId = data.recordId
     let blockPassID = data.blockPassID
@@ -56,15 +60,43 @@ export const webhook = async (req :any, res: any) => {
     });
     
     if (event === 'user.created') {
-        let contractUpdation = await addUser(
-            '0x775C72FB1C28c46F5E9976FFa08F348298fBCEC0',
-            givenName,
-            dob,
-            recordId
-        )
-        
-        // database checkup to keep reordId as one
-        console.log('blockchain kyc transaction for user insertion:', contractUpdation);
+        const checkUser = await User.findOne({ recordId: recordId})
+
+        if(!checkUser) {
+            const newUser = new User({
+                refId : refId,
+                recordId : recordId,
+                blockPassID : blockPassID,
+                familyName: familyName.value,
+                email: email.value,
+                givenName: givenName,
+                dob: dob,
+                drivingLicenseCountry: drivingLicenseCountry.value,
+                teir: 0,
+                approved: false,
+                status: 'waiting'
+            })
+
+            await newUser.save()
+
+            let contractUpdation = await addUser(
+                '0x775C72FB1C28c46F5E9976FFa08F348298fBCEC0',
+                givenName,
+                dob,
+                recordId
+            )
+            
+            // database checkup to keep reordId as one
+            console.log('blockchain kyc transaction for user insertion:', contractUpdation);
+        }
+    }
+
+    if (event === 'inreview') {
+        const checkUser = await User.findOne({ recordId: recordId})
+
+        if (checkUser) {
+            checkUser.set('status', 'inreview')
+        }
     }
 
     if (event === 'review.approved') {
