@@ -16,7 +16,8 @@ export interface IUser {
     drivingLicenseCountry: string,
     status: string,
     teir: number,
-    approved: boolean
+    approved: boolean,
+    walletAddress: string
 }
 
 const user = new Schema({
@@ -30,7 +31,8 @@ const user = new Schema({
     drivingLicenseCountry: String,
     status: String,
     teir: Number,
-    approved: Boolean
+    approved: Boolean,
+    walletAddress: String
 })
 
 user.plugin(timestamps)

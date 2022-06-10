@@ -6,7 +6,9 @@ class Blockpass extends React.Component<{},any>{
         super(props)
 
         this.state = {
-            walletAddress: ''
+            walletAddress: '',
+            email: '',
+            name: ''
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -38,7 +40,11 @@ class Blockpass extends React.Component<{},any>{
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ address: this.state.walletAddress })
+            body: JSON.stringify({ 
+                address: this.state.walletAddress,
+                name: this.state.name,
+                email: this.state.email
+            })
         };
         
         fetch('http://localhost:3001/api/address', requestOptions)
@@ -54,11 +60,31 @@ class Blockpass extends React.Component<{},any>{
             <div className="main">
                 <h1>DAMM</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <label>
-                        ENTER WALLETADDRESS
-                    </label>
+                    <h2>
+                        Please add name, email exactly similar to the one you are adding in the blockpass widget !!!
+                    </h2>
+                    <h3>
+                        Once we get the paid we don't have to do this steps
+                    </h3>
+                    <h3>Name</h3>
+                    <input 
+                        className='name'
+                        type="text"
+                        value={this.state.name}
+                        onChange={event => this.setState({ name: event.target.value })}
+                    />
                     <br/>
                     <br/>
+                    <h3>Email</h3>
+                    <input 
+                        className='email'
+                        type="text"
+                        value={this.state.email}
+                        onChange={event => this.setState({ email: event.target.value })}
+                    />
+                    <br/>
+                    <br/>
+                    <h3>Wallet Address</h3>
                     <input 
                         className='walletAddress'
                         type="text"
