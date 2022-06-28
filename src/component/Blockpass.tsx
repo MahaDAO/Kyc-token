@@ -58,14 +58,14 @@ class Blockpass extends React.Component<{},any>{
     render() {
         return (
             <div className="main">
-                <h1>DAMM</h1>
+                <h1>SCLP raw basic web3 implementation</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <h2>
+                    {/* <h2>
                         Please add name, email exactly similar to the one you are adding in the blockpass widget !!!
-                    </h2>
-                    <h3>
+                    </h2> */}
+                    {/* <h3>
                         Once we get the paid we don't have to do this steps
-                    </h3>
+                    </h3> */}
                     <h3>Name</h3>
                     <input 
                         className='name'

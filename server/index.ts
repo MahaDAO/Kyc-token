@@ -18,5 +18,5 @@ app.use(routes);
 // Starting database connection
 open()
 
-const { PORT = 3001 } = process.env;
+const { PORT = 5001 } = process.env;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

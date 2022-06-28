@@ -39,7 +39,13 @@ module.exports = {
       },
       network_id: 97
     },
-
+    scallop_testnet: {
+      url: "http://scallop.rpc.devicoin.org/",
+      provider: function() {
+        return new HDWalletProvider(process.env.SUPER_ACCOUNT, "http://scallop.rpc.devicoin.org/");
+      },
+      network_id: 9000
+    }
   },
   contracts_directory: './contracts/',
   contracts_build_directory: './server/abis/',

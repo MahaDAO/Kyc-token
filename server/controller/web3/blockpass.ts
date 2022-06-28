@@ -9,8 +9,8 @@ dotenv.config();
 const provider = new ethers.providers.JsonRpcProvider('https://rinkeby.infura.io/v3/e95c6744ded94bbe81e881b8ca002ce7')
 const signer = new ethers.Wallet(`${process.env.METAMASK_WALLET_SECRET}`, provider);
 
-const kycNetwork = KycAbi.networks[4]
-const sclNetwork = SclpAbi.networks[4]
+const kycNetwork = KycAbi.networks[9000]
+const sclNetwork = SclpAbi.networks[9000]
 
 const kycContract = new ethers.Contract(kycNetwork.address, KycAbi.abi, provider)
 const kycWithSigner = kycContract.connect(signer)
