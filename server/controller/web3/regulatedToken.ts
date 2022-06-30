@@ -6,8 +6,8 @@ import TokenABI from '../../abis/ERC20Mock.json'
 
 dotenv.config();
 
-//const provider = new ethers.providers.JsonRpcProvider('http://scallop.rpc.devicoin.org/')
-const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545/')
+const provider = new ethers.providers.JsonRpcProvider('http://scallop.rpc.devicoin.org/')
+//const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545/')
 const signer = new ethers.Wallet(`${process.env.SUPER_ACCOUNT}`, provider);
 
 const kycNetwork = KycAbi.networks[9000]
