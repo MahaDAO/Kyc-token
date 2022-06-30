@@ -10,7 +10,7 @@ const provider = new ethers.providers.JsonRpcProvider('http://scallop.rpc.devico
 //const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545/')
 const signer = new ethers.Wallet(`${process.env.SUPER_ACCOUNT}`, provider);
 
-const kycNetwork = KycAbi.networks[9000]
+const kycNetwork = KycAbi.networks[9001]
 
 const tokens = {
     "EUR" : "0xfdbECCe6667CD72c862e6DA6DE0C728Ea6F6CcFE",
