@@ -44,7 +44,7 @@ module.exports = {
       provider: function() {
         return new HDWalletProvider(process.env.SUPER_ACCOUNT, "http://scallop.rpc.devicoin.org/");
       },
-      network_id: 9000
+      network_id: 9001
     }
   },
   contracts_directory: './contracts/',

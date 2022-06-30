@@ -6,15 +6,16 @@ import TokenABI from '../../abis/ERC20Mock.json'
 
 dotenv.config();
 
-const provider = new ethers.providers.JsonRpcProvider('http://scallop.rpc.devicoin.org/')
+//const provider = new ethers.providers.JsonRpcProvider('http://scallop.rpc.devicoin.org/')
+const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545/')
 const signer = new ethers.Wallet(`${process.env.SUPER_ACCOUNT}`, provider);
 
 const kycNetwork = KycAbi.networks[9000]
 
 const tokens = {
-    "EUR" : "0x458263088BAfC21246f490BcAf4013f3F9feC530",
-    "GBP" : "0xDD8E1F429C92368b8BA0e53fC0f697b9c2414212",
-    "USD" : "0x717F73f3637652fb2f692368AEa5Eab94fF2686e"
+    "EUR" : "0xfdbECCe6667CD72c862e6DA6DE0C728Ea6F6CcFE",
+    "GBP" : "0xbEbC436CDc1fd4a09281319f8519D6c2d11FC42f",
+    "USD" : "0x52954E184060Eb91A615CEB4c3F98Be5E98e3259"
 }
 
 const kycContract = new ethers.Contract(kycNetwork.address, KycAbi.abi, provider)
