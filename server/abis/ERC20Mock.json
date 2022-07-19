@@ -26704,12 +26704,12 @@
         }
       },
       "links": {},
-      "address": "0x52954E184060Eb91A615CEB4c3F98Be5E98e3259",
-      "transactionHash": "0xf9d622a687309172475ccb9537eda5c7ce564be97daa4050fadcbccef8917f0d"
+      "address": "0x59f8718E4edeF887D242A5F53526a1eC2bDC8944",
+      "transactionHash": "0xb383c1be8d948e1264dc4702b211f94682429451aa6f489a6e34d6c1ab60a352"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2022-06-30T13:21:02.063Z",
+  "updatedAt": "2022-07-19T12:36:05.822Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
