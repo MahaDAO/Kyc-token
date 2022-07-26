@@ -13,9 +13,9 @@ const signer = new ethers.Wallet(`${process.env.SUPER_ACCOUNT}`, provider);
 const kycNetwork = KycAbi.networks[9001]
 
 const tokens = {
-    "EUR" : "0x5E944AEc68012922BcfB9Fc9eAcb3191b8Aae17b",
-    "GBP" : "0x4977839d54Ab4AAC32D198a562898603456086Bb",
-    "USD" : "0x59f8718E4edeF887D242A5F53526a1eC2bDC8944"
+    "EUR" : "0x5029527256249A0fa9636987B3DBf4F4A2F64A54",
+    "GBP" : "0xfdbECCe6667CD72c862e6DA6DE0C728Ea6F6CcFE",
+    "USD" : "0xbEbC436CDc1fd4a09281319f8519D6c2d11FC42f"
 }
 
 const kycContract = new ethers.Contract(kycNetwork.address, KycAbi.abi, provider)
